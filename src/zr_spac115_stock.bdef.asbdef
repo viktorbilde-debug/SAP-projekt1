@@ -16,6 +16,7 @@ extensible
   create;
   update;
   delete;
+  validation validateAmount on save { create; field Amount; }
 
   field ( readonly : update ) ProductId, WarehouseId, Amount;
   field ( readonly ) LocalCreatedBy, LocalCreatedAt, LocalLastChangedBy, LocalLastChangedAt, LastChangedAt;
@@ -26,7 +27,7 @@ extensible
   draft action Activate optimized;
   draft action Discard;
 
-  validation CheckSemanticKey on save { create; update; }
+  //validation CheckSemanticKey on save { create; update; }
 
   draft determine action Prepare extensible
   {
