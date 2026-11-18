@@ -1,0 +1,41 @@
+managed implementation in class zbp_r_spac115_product unique;
+strict ( 2 );
+with draft;
+extensible;
+
+define behavior for ZR_SPAC115_product alias Product1 //alias <alias_name>
+persistent table zspac115_product
+draft table zspac115_prod_d query ZR_SPACK115_prod_D
+lock master
+total etag LastChangedAt
+authorization master ( instance )
+etag master LocalLastChangedAt
+extensible
+{
+  create;
+  update;
+  delete;
+  field ( readonly : update ) ProductId, name, ProdDis;
+  field ( readonly ) LocalCreatedBy, LocalCreatedAt, LocalLastChangedBy, LocalLastChangedAt, LastChangedAt;
+
+  draft action Resume;
+  draft action Edit;
+  draft action Activate optimized;
+  draft action Discard;
+
+  draft determine action Prepare extensible
+  {
+  }
+
+  mapping for zspac115_product corresponding extensible
+    {
+      ProductId          = product_id;
+      name               = product_name;
+      ProdDis            = product_descri;
+      LocalCreatedBy     = local_created_by;
+      LocalCreatedAt     = local_created_at;
+      LocalLastChangedBy = local_last_changed_by;
+      LocalLastChangedAt = local_last_changed_at;
+      LastChangedAt      = last_changed_at;
+    }
+}

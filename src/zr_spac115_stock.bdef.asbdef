@@ -1,0 +1,46 @@
+managed implementation in class zbp_spac115 unique;
+strict ( 2 );
+with draft;
+extensible;
+
+define behavior for ZR_SPAC115_STOCK alias Stock1
+persistent table zspac115_stock
+draft table zspac115_stock_d query ZR_SPACK115_STOCK_D
+lock master
+total etag LastChangedAt
+authorization master ( instance )
+etag master LocalLastChangedAt
+//late numbering
+extensible
+{
+  create;
+  update;
+  delete;
+
+  field ( readonly : update ) ProductId, WarehouseId, Amount;
+  field ( readonly ) LocalCreatedBy, LocalCreatedAt, LocalLastChangedBy, LocalLastChangedAt, LastChangedAt;
+
+
+  draft action Resume;
+  draft action Edit;
+  draft action Activate optimized;
+  draft action Discard;
+
+  validation CheckSemanticKey on save { create; update; }
+
+  draft determine action Prepare extensible
+  {
+  }
+
+  mapping for zspac115_stock corresponding extensible
+    {
+      WarehouseId        = warehouse_id;
+      ProductId          = product_id;
+      Amount             = amount;
+      LocalCreatedBy     = local_created_by;
+      LocalCreatedAt     = local_created_at;
+      LocalLastChangedBy = local_last_changed_by;
+      LocalLastChangedAt = local_last_changed_at;
+      LastChangedAt      = last_changed_at;
+    }
+}

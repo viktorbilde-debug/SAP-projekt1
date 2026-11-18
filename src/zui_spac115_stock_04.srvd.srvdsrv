@@ -1,0 +1,8 @@
+@EndUserText.label: 'service'
+@AbapCatalog.extensibility.extensible: true
+@ObjectModel.leadingEntity.name: 'ZC_SPAC115_STOCK'
+define service ZUI_SPAC115_STOCK_04 {
+  expose ZC_SPAC115_STOCK;
+  expose ZC_SPAC115_product;
+  expose ZC_SPAC115_warehouse;
+}
